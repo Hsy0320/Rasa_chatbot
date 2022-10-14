@@ -1,0 +1,246 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - es
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - no, thanks
+    - no, that's ok
+- intent: thankyou
+  examples: |
+    - thank you
+    - okay cool
+    - okay thank you good bye
+    - okay thank you
+    - thanks
+    - uh thank you good bye
+    - and thats all thank you and good bye
+    - thank you and good bye
+    - sorry about my mistakes thank you good bye
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: basic_inform
+  examples: |
+    - what's your restaurant name?
+    - tell me about your restaurant
+    - when do you open?
+    - what food does your restaurant serve?
+    - information about your restaurant
+    - tell me something about your restaurant.
+- intent: booking
+  examples: |
+    - reserve
+    - book
+    - table available
+    - reservation
+    - booking
+    - i want to book a table
+    - i want to make a reservation
+    - is there a table available
+    - i want to reserve a table
+    - book a table for me
+    - reserve a seat for us
+    - make a reservation
+    - i want to book a table
+    - make a reservation for me
+    - i want book [2](seats) tonight
+    - book [2](seats) seats at [7:30](CARDINAL) [p.m](time_of_day) for me
+    - [2](seats) seats at [7:30](CARDINAL) [p.m](time_of_day)
+    - i want to reserve a table for a party of [4](seats)
+    - i want to reserve a table for [2](seats)
+    - i want to reserve [2](seats) seats
+    - i want to book a table for [4](seats) at [7:00](CARDINAL) [pm](time_of_day)
+- intent: name_detail
+  examples: |
+    - My name is [Siyu](name).
+    - [Siyu](name) is my name.
+    - Myself [Siyu](name).
+    - People call me [Siyu](name).
+    - I am [Siyu Heng](name).
+    - [Siyu Heng](name).
+    - [Judy Gomez] (name).
+    - [David](name)
+    - my name is [Devika](name)
+    - myself [Devika](name)
+    - ohh myself [Divyansh](name)
+    - people call me [David](name)
+    - myself [Heng](name)
+    - myself [Siyu](name)
+    - [heng](name)
+    - i am [siyu](name)
+- intent: seats_detail
+  examples: |
+    - [2](seats)
+    - [3](seats)
+    - [5](seats)
+    - [8](seats)
+    - [2](seats) seats
+    - [3](seats) seats
+    - [4](seats) seats
+    - [5](seats) seats
+    - i want to book [2](seats) seats
+    - i want to book [3](seats) seats
+    - i want to book [4](seats) seats
+    - i want to book [5](seats) seats
+    - book [2](seats) for me.
+    - reserve a table for [2](seats).
+    - [2](seats) seats.
+    - [3](seats) seats at least
+    - [2](seats) seats at least
+    - [4](seats)
+    - [2](seats) seats, please
+    - [4](seats) seats
+- intent: time_detail
+  examples: |
+    - in half(CARDINAL) an hour
+    - after two(CARDINAL) hours
+    - after one(CARDINAL) hour
+    - at [9](CARDINAL) [pm](time_of_day)
+    - at [7:30](CARDINAL) [pm](time_of_day)
+    - at [8:00](CARDINAL) [pm](time_of_day)
+    - [6](CARDINAL) [am](time_of_day)
+    - [7](CARDINAL) [pm](time_of_day)
+    - [8](CARDINAL) [pm](time_of_day)
+    - [9](CARDINAL) [pm](time_of_day)
+    - [10](CARDINAL) [pm](time_of_day)
+    - at [8:30](CARDINAL) [pm](time_of_day)
+    - at [8](CARDINAL) [pm](time_of_day)
+    - about [9](CARDINAL) [pm](time_of_day)
+    - [8](CARDINAL) [p.m](time_of_day)
+    - [4](CARDINAL) [p.m](time_of_day)
+    - about [7:30](CARDINAL) [p.m](time_of_day)
+    - [9](CARDINAL) [p.m](time_of_day)
+    - at [9](CARDINAL) [p.m](time_of_day)
+- intent: explain
+  examples: |
+    - it doesn't matter
+    - none of your business
+    - i won't tell you
+    - why you need to know that
+    - you shouldn't know
+    - it's none of your business
+    - does that matter
+- intent: phone_detail
+  examples: |
+    - My phone number is [1234567899](phone)
+    - Here is my number [1234567898](phone)
+    - my number is [1234567890](phone)
+    - phone number [9876543210](phone).
+    - [1122334455](phone)
+    - [9536037579](phone)
+    - [1234567890](phone)
+    - [1111111111](phone)
+- intent: stop
+  examples: |
+    - you can't help me
+    - that was shit, you're not helping
+    - you can't help me with what i need
+    - i guess you can't help me then
+    - that's not what i want
+    - this is leading to nothing
+    - this conversation is not really helpful
+    - I think you can't help me
+    - hm i don't think you can do what i want
+    - stop
+    - stop go back
+    - and you call yourself bot company? pff
+    - and that's it?
+    - nothing else?
+    - you are not help
+    - stop, go back
+    - you are not helping
+- intent: require_feedback
+  examples: |
+    - feedback
+    - give feedback
+    - submit feedback
+    - i want to fill the feedback form
+    - fill the feedback form
+    - how to fill the feedback form
+    - what is the process to give feedback
+- intent: taste_degree
+  examples: |
+    - [Very satisfied](taste)
+    - [good](taste)
+    - [not bad](taste)
+    - [dissatisfied](taste)
+    - [super bad](taste)
+- intent: env_degree
+  examples: |
+    - [Very satisfied](environment)
+    - [good](environment)
+    - [not bad](environment)
+    - [dissatisfied](environment)
+    - [super bad](environment)
+- intent: sev_degree
+  examples: |
+    - [Very satisfied](service)
+    - [good](service)
+    - [not bad](service)
+    - [dissatisfied](service)
+    - [super bad](service)
+- intent: human_service
+  examples: |
+    - call me your manager
+    - give me your manager number
+    - I need a real human!
+    - require human service
+    - human service
+    - how can i connect with your manager
+    - transfer me to human
+    - human hand off
+    - human
+- intent: nlu_fallback
+  examples: |
+    - i said hi you moron
+    - ?
+    - you idoit
+    - dumb bot
+    - such a stupid robot
+    - stupid
+    - jerk

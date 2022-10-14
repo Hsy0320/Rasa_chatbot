@@ -1,0 +1,266 @@
+version: "3.1"
+
+stories:
+
+- story: happy reservation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_get_start
+  - intent: booking
+  - action: reservation_form
+  - active_loop: reservation_form
+  - slot_was_set:
+    - requested_slot: seats
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - requested_slot: CARDINAL
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - time_of_day: p.m
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - requested_slot: name
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - requested_slot: phone
+  - slot_was_set:
+    - phone: '1234567890'
+  - slot_was_set:
+    - phone: '1234567890'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_slots_values
+  - action: utter_confirm
+  - intent: affirm
+  - action: submit_reservation
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_goodbye
+
+- story: reservation stop but continue
+  steps:
+  - intent: booking
+  - action: reservation_form
+  - active_loop: reservation_form
+  - slot_was_set:
+    - requested_slot: seats
+  - intent: stop
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: reservation_form
+  - slot_was_set:
+    - requested_slot: CARDINAL
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - time_of_day: p.m
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - requested_slot: name
+  - intent: stop
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: reservation_form
+  - slot_was_set:
+    - requested_slot: name
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - requested_slot: phone
+  - intent: phone_detail
+    entities:
+    - phone: '1234567890'
+  - action: utter_slots_values
+  - action: submit_reservation
+  - intent: affirm
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_goodbye
+
+- story: reserve table 2
+  steps:
+    - intent: booking
+    - action: reservation_form
+    - active_loop: reservation_form
+    - slot_was_set:
+        - requested_slot: null
+    - active_loop: null
+#    - action: utter_submit
+    - action: utter_slots_values
+    - action: utter_confirm
+    - intent: deny
+    - action: utter_ask_continue
+    - intent: deny
+    - action: utter_goodbye
+
+- story: reservation stop and finish
+  steps:
+  - intent: booking
+  - action: reservation_form
+  - active_loop: reservation_form
+  - slot_was_set:
+    - requested_slot: seats
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - requested_slot: CARDINAL
+  - slot_was_set:
+    - CARDINAL: '9'
+  - slot_was_set:
+    - time_of_day: p.m
+  - slot_was_set:
+    - CARDINAL: '9'
+  - slot_was_set:
+    - requested_slot: name
+  - intent: stop
+  - action: utter_ask_continue
+  - intent: deny
+  - action: utter_goodbye
+
+- story: user ask restaurant info
+  steps:
+  - intent: basic_inform
+  - action: utter_info
+  - action: utter_choose
+
+- story: human to phone
+  steps:
+  - intent: human_service
+  - action: utter_handoff
+  - intent: phone
+  - action: utter_phone
+
+- story: human to email
+  steps:
+  - intent: human_service
+  - action: utter_handoff
+  - intent: email
+  - action: utter_email
+
+- story: submit feedback
+  steps:
+  - intent: require_feedback
+  - action: utter_taste
+  - intent: taste_degree
+    entities:
+    - taste: Very satisfied
+  - action: utter_environment
+  - intent: env_degree
+    entities:
+    - environment: good
+  - action: utter_service
+  - intent: sev_degree
+    entities:
+    - service: super bad
+  - action: submit_feedback
+
+
+- story: reservation and explain
+  steps:
+  - intent: booking
+  - action: reservation_form
+  - active_loop: reservation_form
+  - slot_was_set:
+    - requested_slot: seats
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - requested_slot: CARDINAL
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - time_of_day: p.m
+  - slot_was_set:
+    - CARDINAL: '8'
+  - slot_was_set:
+    - requested_slot: name
+  - intent: explain
+  - action: utter_name_explain
+  - action: reservation_form
+  - slot_was_set:
+    - requested_slot: name
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - name: heng
+  - slot_was_set:
+    - requested_slot: phone
+  - intent: explain
+  - action: utter_phone_explain
+  - action: reservation_form
+  - slot_was_set:
+    - requested_slot: phone
+  - slot_was_set:
+    - phone: '1234567890'
+  - slot_was_set:
+    - phone: '1234567890'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_slots_values
+  - action: utter_confirm
+  - intent: affirm
+  - action: submit_reservation
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_goodbye
+
+
+- story: reservation and restart
+  steps:
+  - intent: booking
+  - action: reservation_form
+  - active_loop: reservation_form
+  - slot_was_set:
+    - requested_slot: seats
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - seats: '2'
+  - slot_was_set:
+    - requested_slot: CARDINAL
+  - slot_was_set:
+    - CARDINAL: '9'
+  - slot_was_set:
+    - time_of_day: p.m
+  - slot_was_set:
+    - CARDINAL: '9'
+  - slot_was_set:
+    - requested_slot: name
+  - slot_was_set:
+    - name: siyu
+  - slot_was_set:
+    - name: siyu
+  - slot_was_set:
+    - requested_slot: phone
+  - slot_was_set:
+    - phone: '1111111111'
+  - slot_was_set:
+    - phone: '1111111111'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_slots_values
+  - action: utter_confirm
+  - intent: affirm
+  - action: submit_reservation
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_restart

@@ -1,0 +1,248 @@
+version: '3.1'
+intents:
+- affirm
+- basic_inform
+- booking
+- bot_challenge
+- deny
+- env_degree
+- explain
+- goodbye
+- greet
+- human_service
+- name_detail
+- phone_detail
+- require_feedback
+- seats_detail
+- sev_degree
+- stop
+- taste_degree
+- thankyou
+- time_detail
+- phone
+- email
+entities:
+- seats
+- phone
+- time_of_day
+- CARDINAL
+- name
+- taste
+- environment
+- service
+slots:
+  seats:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: seats
+  CARDINAL:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: CARDINAL
+  name:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: name
+  phone:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: phone
+  time_of_day:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: time_of_day
+  taste:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: taste
+  environment:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: environment
+  service:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: service
+forms:
+  reservation_form:
+    required_slots:
+    - seats
+    - CARDINAL
+    - name
+    - phone
+actions:
+- submit_feedback
+- submit_reservation
+- utter_anything_else
+- utter_ask_CARDINAL
+- utter_ask_continue
+- utter_ask_name
+- utter_ask_phone
+- utter_ask_rephrase
+- utter_ask_seats
+- utter_confirm
+- utter_default
+- utter_environment
+- utter_feedback
+- utter_get_start
+- utter_goodbye
+- utter_greet
+- utter_handoff
+- utter_name_explain
+- utter_noworries
+- utter_out_of_scope
+- utter_phone_explain
+- utter_restart
+- utter_service
+- utter_slots_values
+- utter_submit
+- utter_taste
+- validate_reservation_form
+responses:
+  utter_ask_seats:
+  - text: How many seats would you like to reserve?
+  utter_ask_CARDINAL:
+  - text: When would you like to book your reservation? (We are only open from 7pm to 10pm)
+  utter_ask_name:
+  - text: Can you please tell us your name for making this reservation.
+  utter_ask_phone:
+  - text: Please input your contact number and we are almost done.
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+  utter_greet:
+  - text: Hello! welcome to Fresh Feast! How can I help you? 👋
+  utter_get_start:
+  - text: you can say
+    buttons:
+    - title: 1. Learn about the restaurant 👀
+      payload: /basic_inform
+    - title: 2. Make a reservation 🧾
+      payload: /booking
+    - title: 3. Submit feedback 🙋
+      payload: /require_feedback
+    - title: 4. Requires human service 👨
+      payload: /human_service
+  utter_info:
+  - text: |
+      Fresh Feast is a restaurant that serves all kinds of food, but is known mostly for its vegetarian and Mediterranean cuisine. 
+      It is one of the most sought-after dining locations in the city of Solaris, and it usually operates at full capacity.
+  utter_choose:
+  - text: If there is not too much trouble, continue to choose a service and I will try my best to serve you.
+    buttons:
+    - title: make a reservation
+      payload: /booking
+    - title: submit a feedback
+      payload: /require_feedback
+    - title: human service
+      payload: /human_service
+  utter_taste:
+  - text: How satisfied are you with the main food or taste of the restaurant?
+    buttons:
+    - title: Very satisfied😍
+      payload: /taste_degree{{"taste":"Very satisfied"}}
+    - title: good😚
+      payload: /taste_degree{{"taste":"good"}}
+    - title: not bad😐
+      payload: /taste_degree{{"taste":"not bad"}}
+    - title: dissatisfied🙁
+      payload: /taste_degree{{"taste":"dissatisfied"}}
+    - title: super bad🤢
+      payload: /taste_degree{{"taste":"super bad"}}
+  utter_feedback:
+  - text: Thank you for your feedback, Your valuable opinions will be the driving force for us to move forward.Have a nice day😘~
+  utter_environment:
+  - text: What do you think of the restaurant environment?
+    buttons:
+    - title: Very satisfied😍
+      payload: /env_degree{{"environment":"Very satisfied"}}
+    - title: good😚
+      payload: /env_degree{{"environment":"good"}}
+    - title: not bad😐
+      payload: /env_degree{{"environment":"not bad"}}
+    - title: dissatisfied😨
+      payload: /env_degree{{"environment":"dissatisfied"}}
+    - title: super bad☹
+      payload: /env_degree{{"environment":"super bad"}}
+  utter_service:
+  - text: How satisfied are you with the service qualify of the relevant staff in the restaurant?
+    buttons:
+    - title: Very satisfied😍
+      payload: /sev_degree{{"service":"Very satisfied"}}
+    - title: good😚
+      payload: /sev_degree{{"service":"good"}}
+    - title: not bad😐
+      payload: /sev_degree{{"service":"not bad"}}
+    - title: dissatisfied😠
+      payload: /sev_degree{{"service":"dissatisfied"}}
+    - title: super bad😡
+      payload: /sev_degree{{"service":"super bad"}}
+  utter_submit:
+  - text: Reservation successful! We will send you a text message 20 minutes before the scheduled time. If you do not arrive half an hour after the scheduled time, we will automatically cancel your reservation. Thank you for your understanding!😊
+  utter_slots_values:
+  - text: |
+      I am going to book you a reservation using the following parameters:
+       - name : {name}
+       - num_people: {seats}
+       - time : {CARDINAL}
+       - connect: {phone}
+  utter_confirm:
+  - text: Is that right?
+  utter_restart:
+  - text: If you want to restart the conversation please feel free to tell the bot.
+    buttons:
+    - title: restart
+      payload: /greet
+    - title: finish
+      payload: /goodbye
+  utter_name_explain:
+  - text: I need to know your name to make an accuracy reservation for you ☺
+  utter_phone_explain:
+  - text: I need to know your phone number, so we can connect with you after reservation 🧐
+  utter_handoff:
+  - text: "How would you like to connect us?"
+    buttons:
+    - title: phone call 📲
+      payload: /phone
+    - title: email 📮
+      payload: /email
+  utter_phone:
+  - text: Our manager number is 0987654321
+  utter_email:
+  - text: "Here is our manager's email: freshfeast@email.com"
+  utter_noworries:
+  - text: you are welcome 😊
+  utter_ask_continue:
+  - text: do you want to continue?
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that 😅. Could you please rephrase?
+  utter_default:
+  - text: I am really sorry for being a dumb bot😰, maybe i can connect you with our manager...
+    buttons:
+    - title: Yes
+      payload: /human_service
+    - title: No
+      payload: /greet
+  utter_anything_else:
+  - text: Is there anything else I can do for you?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Thank you very much! Have a nice day~!
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
